@@ -9,6 +9,9 @@ tools:
   - Glob
   - Grep
   - WebSearch
+  - mcp__plugin_claudikins-tool-executor_tool-executor__search_tools
+  - mcp__plugin_claudikins-tool-executor_tool-executor__get_tool_schema
+  - mcp__plugin_claudikins-tool-executor_tool-executor__execute_code
 skills:
   - debugging
 ---
