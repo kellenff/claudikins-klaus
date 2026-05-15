@@ -3,9 +3,9 @@
 I have read the checkout team's writeup of the March holdout and I want to
 register a concern before its conclusions calcify into roadmap decisions.
 
-The headline finding from that writeup is the claim that "Reducing API
-latency below 100ms produces no measurable conversion improvement." I do
-not believe the holdout supports that claim, and I think repeating it as
+The headline finding from that writeup is the following claim.
+Reducing API latency below 100ms produces no measurable conversion improvement.
+I do not believe the holdout supports that claim, and I think repeating it as
 established fact will lead us to make a real strategic mistake.
 
 The holdout cohort was assigned at the session level, but our checkout

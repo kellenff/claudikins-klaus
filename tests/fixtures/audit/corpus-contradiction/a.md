@@ -12,9 +12,8 @@ hypothesis that further latency reductions would translate into meaningful
 revenue gains. The cohort received the unoptimised stack; the rest of
 traffic received the optimised one. After eight weeks and a sample size
 that comfortably clears our usual significance bar, the difference in
-checkout completion rate between the two cohorts is not distinguishable
-from zero. Reducing API latency below 100ms produces no measurable
-conversion improvement.
+checkout completion rate between the two cohorts is not distinguishable from zero.
+Reducing API latency below 100ms produces no measurable conversion improvement.
 
 This is not the result we expected, and it is uncomfortable for a team
 that has built its quarterly goals around latency reductions. But the data
