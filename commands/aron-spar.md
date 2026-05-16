@@ -7,7 +7,6 @@ allowed-tools:
   - Glob
   - Grep
   - Edit
-  - Write
   - Bash
   - Task
   - AskUserQuestion
@@ -49,7 +48,7 @@ Read the resolved audit file end-to-end. Extract:
 - **Sparring trail** — any previous `## Sparring continuation — turn N` blocks appended by prior `/aron-spar` invocations
 - **Termination state** — if a `## Sparring closed — <reason>` footer is present, refuse to continue (see edge cases)
 
-Count the existing continuation turns to determine the next turn number `N`.
+**Turn-counting rule:** Match headings using regex `^## Sparring continuation — turn (\d+)\b` (note: em-dash, U+2014). Extract all matched turn numbers; let `max_n` be the maximum found (0 if no matches). The next turn number is `max_n + 1`. If `max_n` does NOT equal the count of matched headings, halt with: `audit malformed: turn numbering inconsistent (max turn $max_n but $count headings found). Investigate or restart with /claudikins-klaus:aron --interactive.`
 
 ## User-turn input
 
@@ -113,6 +112,8 @@ Task({
 Aron handles all persona, board narration, and methodology rigour internally. This command provides only the wiring.
 
 ## Append the turn to the audit file
+
+**Append safety:** Use `Edit` to insert the new `## Sparring continuation — turn N` block at end-of-file. NEVER use `Write` against an existing audit file — `Write` overwrites and would discard all prior turns. (Write is not in this command's allowed-tools list for this reason.)
 
 After Aron returns, append the continuation to `.claude/logic-audits/<slug>.md`:
 
