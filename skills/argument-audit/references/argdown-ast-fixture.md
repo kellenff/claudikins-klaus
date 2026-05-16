@@ -1,5 +1,13 @@
 # Argdown `export_json` AST — fixture and field-name reference
 
+> **Critical — read first:** `export_json` SILENTLY DROPS YAML metadata.
+> The AST contains no `data`, `meta`, or `metadata` field on `IStatement`,
+> `IArgument`, `IRelation`, or `IEquivalenceClass`. If your audit needs
+> Walton scheme tagging (`{scheme: "expert-opinion"}`) or Toulmin role
+> tagging (`{toulmin: "claim"|"data"|"warrant"|...}`), you MUST re-parse
+> the YAML out of the raw Argdown source — `export_json` will not deliver it.
+> See [§YAML metadata location — NOT IN THE AST](#yaml-metadata-location--not-in-the-ast) for full discussion.
+
 This file documents the **actual** JSON AST shape returned by the
 `@casualtheorics/argdown-plugin` `export_json` MCP tool. The
 `argument-audit` skill (Phase 3 — structural audit) loads this artifact at
@@ -9,10 +17,17 @@ description-level names from argdown.org.
 - **Captured on:** 2026-05-15
 - **Captured by:** Task 1 (`argdown-ast-fixture`)
 - **Tool:** `mcp__plugin__@casualtheorics_argdown-plugin__argdown-mcp::export_json`
-- **Server bundle:** `/Users/kellen/Projects/agent-argdown/dist/server.js`
+- **Server bundle:** spawned from the installed `@casualtheorics/argdown-plugin`
+  package — locate via `node_modules/@casualtheorics/argdown-plugin/dist/server.js`
+  (or `npm root` / `npm root -g` if installed globally). The exact path on the
+  original capture machine was `/Users/kellen/Projects/agent-argdown/dist/server.js`
+  (a local development build); future re-captures should resolve the bundle via
+  the installed plugin path so the recipe is portable.
 - **Round-trip method:** direct JSON-RPC over stdio against the MCP server (the
   tool-executor sandbox was unavailable in this session, but the call still hit
-  the real plugin code and returned a real AST — this is **not** degraded).
+  the real plugin code and returned a real AST — this is **not** degraded). See
+  [§Appendix: reproducing this round-trip](#appendix-reproducing-this-round-trip)
+  for the actual JSON-RPC envelopes.
 - **Argdown version (per the plugin's parent `package.json`):** `@argdown/core ^2.0.1`,
   `@argdown/node ^2.0.3`.
 
@@ -840,3 +855,116 @@ Callers must extract the fenced block (or attempt direct `JSON.parse` and
    `IArgdownResponse` wrapper are NOT part of `export_json`'s emitted
    payload — they live only in the human-readable header line that
    precedes the fenced JSON block.
+
+## Appendix: reproducing this round-trip
+
+This appendix documents the JSON-RPC envelopes required to re-capture the
+fixture without relying on the tool-executor sandbox or any IDE-side MCP
+client. Anyone with the plugin installed can replay it from a plain shell.
+
+### 1. Locate and spawn the server bundle
+
+```bash
+# Resolve the bundle portably (works whether installed locally or globally).
+BUNDLE="$(npm root)/@casualtheorics/argdown-plugin/dist/server.js"
+# Or, if installed globally:
+#   BUNDLE="$(npm root -g)/@casualtheorics/argdown-plugin/dist/server.js"
+
+node "$BUNDLE"
+```
+
+The server speaks MCP over stdio: newline-delimited JSON-RPC 2.0 frames on
+stdin/stdout. (Some MCP server builds use the `Content-Length:`-framed
+variant from LSP; the @casualtheorics bundle uses plain newline-delimited
+JSON. Verify on actual re-capture if frame errors occur.)
+
+### 2. `initialize` handshake (canonical MCP shape; verify on actual re-capture)
+
+Send as a single newline-terminated frame (the JSON is shown pretty-printed
+here for readability — minify it onto one line before writing it to stdin):
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {},
+    "clientInfo": { "name": "manual-recapture", "version": "0.0.1" }
+  }
+}
+```
+
+Then send the `initialized` notification (no `id`):
+
+```json
+{ "jsonrpc": "2.0", "method": "notifications/initialized", "params": {} }
+```
+
+The server's `initialize` response advertises the three tools
+(`parse`, `export_json`, `dung_extensions`). Confirm `export_json` is
+present before proceeding.
+
+### 3. `tools/call` for `export_json`
+
+The fixture-producing call uses the inline-source shape documented above
+(`{kind: "inline", source: "<argdown text>"}`). Send as a single
+newline-terminated frame (minify before writing to stdin; newlines inside
+`source` are already escaped as `\n`):
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "export_json",
+    "arguments": {
+      "input": {
+        "kind": "inline",
+        "source": "[Thesis]: Censorship is not wrong in principle. {scheme: \"expert-opinion\", toulmin: \"claim\"}\n  + <Free-speech-limits>\n  - <C1>\n\n<Free-speech-limits>: Free speech ceases when it harms others.\n\n<C1>\n\n(1) E is an expert in domain D. {scheme: \"expert-opinion\"}\n(2) E asserts that P in D.\n----\n  {inferenceRules: [\"Modus ponens (uses: 1,2)\"]}\n(3) P is plausibly true.\n\n[A]: A is plausibly true. {toulmin: \"claim\"}\n  -> [Thesis]\n\n<Undercutter>\n\n(1) Reason to doubt the inference from (1)+(2) to (3).\n----\n(2) The inference from (1)+(2) to (3) is undercut.\n  -_ <C1>._1\n"
+      }
+    }
+  }
+}
+```
+
+(Use whatever Argdown source you intend to re-capture; the snippet above
+matches the [§Source fixture](#source-fixture) earlier in this document.
+The `-_ <C1>._1` undercut syntax targets the inference under conclusion 1
+of `<C1>`.)
+
+The response's `result.content[0].text` is the
+`Parsed N statements ...\nJSON:\n\`\`\`json\n{...}\n\`\`\`` envelope
+described in surprise #6. Strip the header line and the markdown fence to
+get the raw AST.
+
+### 4. Shutdown
+
+```json
+{ "jsonrpc": "2.0", "id": 3, "method": "shutdown" }
+```
+
+```json
+{ "jsonrpc": "2.0", "method": "exit" }
+```
+
+Then close stdin (`Ctrl-D` in an interactive shell) and the server
+process should exit on its own. If it does not, `kill` the PID — the
+process holds no persistent state worth preserving.
+
+### 5. Caveats
+
+- The `protocolVersion` string (`"2024-11-05"`) is the MCP rev that was
+  current at capture time; newer plugin builds may negotiate a different
+  version. The server will reply with whatever it supports — accept the
+  negotiated value.
+- Field shapes inside `arguments` (the `tools/call` `params.arguments`
+  envelope) are MCP-canonical; the @casualtheorics plugin additionally
+  requires the `input` wrapper containing `kind` + `source` (or `kind` +
+  `path`). This wrapper is plugin-specific, not MCP-canonical.
+- If the bundle ever stops accepting newline-delimited frames and switches
+  to `Content-Length:` framing, prefix each frame with
+  `Content-Length: <bytes>\r\n\r\n` instead of a newline. (Canonical MCP
+  shape; verify on actual re-capture.)
