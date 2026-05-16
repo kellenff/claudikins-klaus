@@ -1,0 +1,314 @@
+{
+  "session_id": "plan-2026-05-15-1137",
+  "timestamp": "2026-05-15T11:37:00Z",
+  "decisions": [
+    {
+      "id": "ADR-plan-2026-05-15-1137-001",
+      "source_checkpoint": "outline.phase-3.approach-selection",
+      "decision_text": "Adopt Approach B — agent + thick methodology skill mirroring klaus + debugging shape; 7-phase argument-audit skill with sparring as terminal phase",
+      "rationale_text": "(no annotation; selected from option list). Recommendation reasoning: B matches the plugin's established klaus.md + debugging shape and is the path of least surprise; A under-delivers on success criteria 1 (non-obvious weaknesses) and 4 (clean round-trip) because both require methodology beyond delegation; C's split between audit and sparring skills creates discovery friction without distinct workflows since sparring is naturally the terminal phase of an audit, not a parallel concern.",
+      "matched_keywords": {
+        "PURPOSE": [],
+        "STACK": [],
+        "ARCHITECTURE": [],
+        "PATTERNS": [],
+        "TRADEOFFS": [],
+        "PHILOSOPHY": ["approach"]
+      },
+      "scores_before_penalty": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.4
+      },
+      "overlap_count": 1,
+      "overlap_penalty_per_section": 0.0,
+      "target_section_hint": null,
+      "target_section_hint_boost": 0.0,
+      "scores_final": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.4
+      },
+      "final_score": 0.4,
+      "routed_to": "PHILOSOPHY",
+      "tie_break_applied": false,
+      "threshold_band": "<0.5 (individual escalation)"
+    },
+    {
+      "id": "ADR-plan-2026-05-15-1137-002",
+      "source_checkpoint": "outline.phase-5.iterate-or-finalise",
+      "decision_text": "Finalise plan after absorbing Klaus's hits #1, #4, #6, #7; conscious non-application of hits #2 and #5",
+      "rationale_text": "(no annotation; selected from option list). Klaus reviewer verdict (verbatim summary): scored 3-0 with seven distinct hits; identified killer (one-shot agents don't loop, breaking sparring assumption), big (SC-9 contradiction-vs-equivalence scoping bug), and four notable/smaller methodology refinements. Revisions absorbed: (#7) sparring split into digest-default + --interactive opt-in via new commands/aron-spar.md follow-up command (adds T9, brings total to 9 tasks); (#1) SC-9 reworded to \"shared claim asserted in one doc and attacked in another (literal-text match)\"; (#4) skill split from 7 phases to 8 (classify-schemes and fire-critical-questions separated); (#6) SC-7 reworded to \"traceable source-span in report; prose may paraphrase\". Conscious non-applications: (#2) Walton scope kept at four named schemes; (#5) fixture realism kept as 3 synthetic. Plan locked: 9 tasks across 4 batches; 11 success criteria (SC-1 through SC-10 plus SC-8b); 9 risks (R-1 to R-9 with R-2 impact downgraded Medium→Low after SC-9 rescoping).",
+      "matched_keywords": {
+        "PURPOSE": ["scope"],
+        "STACK": [],
+        "ARCHITECTURE": [],
+        "PATTERNS": [],
+        "TRADEOFFS": [],
+        "PHILOSOPHY": []
+      },
+      "scores_before_penalty": {
+        "PURPOSE": 0.4,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "overlap_count": 1,
+      "overlap_penalty_per_section": 0.0,
+      "target_section_hint": null,
+      "target_section_hint_boost": 0.0,
+      "scores_final": {
+        "PURPOSE": 0.4,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "final_score": 0.4,
+      "routed_to": "PURPOSE",
+      "tie_break_applied": false,
+      "threshold_band": "<0.5 (individual escalation)"
+    },
+    {
+      "id": "ADR-plan-2026-05-15-1137-003",
+      "source_checkpoint": "execute.phase-5.merge-decision.batch-1",
+      "decision_text": "Merge each branch separately with --no-ff (preserve history) — three merge commits, one per task",
+      "rationale_text": "(no annotation; selected from option list). Conflict check: None detected (T1 owns argdown-ast-fixture.md, T2 owns three reference docs, T3 owns 10 fixture files; non-overlapping). Three merges executed: worktree-agent-a115f2293a707692c (T1, +970 lines argdown-ast-fixture.md), worktree-agent-acb25fb998378b8f7 (T2, +957 lines across walton-schemes/methodology-references/audit-report-template), worktree-agent-ae95ba9c5988d377e (T3, +547 lines across 10 fixture files). Per-branch history preserved including T3 retry fde13ce and the three fix-up commits, supporting future review-by-blame.",
+      "matched_keywords": {
+        "PURPOSE": [],
+        "STACK": [],
+        "ARCHITECTURE": [],
+        "PATTERNS": [],
+        "TRADEOFFS": [],
+        "PHILOSOPHY": []
+      },
+      "scores_before_penalty": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "overlap_count": 0,
+      "overlap_penalty_per_section": 0.0,
+      "target_section_hint": null,
+      "target_section_hint_boost": 0.0,
+      "scores_final": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.3,
+        "PHILOSOPHY": 0.0
+      },
+      "final_score": 0.3,
+      "routed_to": "TRADEOFFS",
+      "tie_break_applied": false,
+      "threshold_band": "<0.5 (individual escalation)",
+      "notes": "No keywords matched; catch-all to TRADEOFFS at 0.3."
+    },
+    {
+      "id": "ADR-plan-2026-05-15-1137-004",
+      "source_checkpoint": "execute.phase-5.merge-decision.batch-2",
+      "decision_text": "Merge each branch separately with --no-ff (preserve history) — two merge commits, T4 then T5",
+      "rationale_text": "(no annotation; methodology default after batch 1 set precedent). Conflict check: None detected (T4 owns skills/argument-audit/SKILL.md, T5 owns agents/aron.md; non-overlapping). Two merges executed: worktree-agent-ad2ca396d8532a159 (T4, +259 lines SKILL.md), worktree-agent-a4677a7b4fdf84fec (T5, +241 lines agents/aron.md including the --sober fix-up commit 0d6a8ca on top of 8d0d074).",
+      "matched_keywords": {
+        "PURPOSE": [],
+        "STACK": [],
+        "ARCHITECTURE": [],
+        "PATTERNS": [],
+        "TRADEOFFS": [],
+        "PHILOSOPHY": []
+      },
+      "scores_before_penalty": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "overlap_count": 0,
+      "overlap_penalty_per_section": 0.0,
+      "target_section_hint": null,
+      "target_section_hint_boost": 0.0,
+      "scores_final": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.3,
+        "PHILOSOPHY": 0.0
+      },
+      "final_score": 0.3,
+      "routed_to": "TRADEOFFS",
+      "tie_break_applied": false,
+      "threshold_band": "<0.5 (individual escalation)",
+      "notes": "No keywords matched; catch-all to TRADEOFFS at 0.3."
+    },
+    {
+      "id": "ADR-plan-2026-05-15-1137-005",
+      "source_checkpoint": "execute.phase-5.merge-decision.batch-3",
+      "decision_text": "Merge each branch separately with --no-ff (preserve history) — two merge commits, T6 then T9",
+      "rationale_text": "(no annotation; methodology default after batch 1/2 precedent). Conflict check: None detected (T6 owns commands/aron.md, T9 owns commands/aron-spar.md; non-overlapping). Two merges: worktree-agent-af19affe8e9021c20 (T6, +148 lines), worktree-agent-a77ec2918dbf093bb (T9, +157 lines including fix-up commit 0a9458e on top of b1f9488).",
+      "matched_keywords": {
+        "PURPOSE": [],
+        "STACK": [],
+        "ARCHITECTURE": [],
+        "PATTERNS": [],
+        "TRADEOFFS": [],
+        "PHILOSOPHY": []
+      },
+      "scores_before_penalty": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "overlap_count": 0,
+      "overlap_penalty_per_section": 0.0,
+      "target_section_hint": null,
+      "target_section_hint_boost": 0.0,
+      "scores_final": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.3,
+        "PHILOSOPHY": 0.0
+      },
+      "final_score": 0.3,
+      "routed_to": "TRADEOFFS",
+      "tie_break_applied": false,
+      "threshold_band": "<0.5 (individual escalation)",
+      "notes": "No keywords matched; catch-all to TRADEOFFS at 0.3."
+    },
+    {
+      "id": "ADR-plan-2026-05-15-1137-006",
+      "source_checkpoint": "execute.phase-5.merge-decision.batch-4",
+      "decision_text": "Merge T7 README branch with --no-ff (consistent with batches 1-3 precedent). T8a structural verify produced no files to merge. T8b smoke (Klaus-as-Aron) produced no files to merge. SKILL.md v1.0.1 fix-up (gaps 1, 5, 6) committed directly on main as 702bc24 because babyclaude was blocked by permission prompts on the merged file.",
+      "rationale_text": "(no annotation; methodology default after batches 1-3 precedent). T7 owns README.md, no conflicts. The SKILL.md fix-up commit landed directly on main rather than via worktree because (a) the file was already merged on main, (b) babyclaude attempts to Edit/Write got permission-denied, (c) the orchestrator-direct fix-up was a tightly-scoped 3-edit surgical pass equivalent to what babyclaude was instructed to do.",
+      "matched_keywords": {
+        "PURPOSE": [],
+        "STACK": [],
+        "ARCHITECTURE": [],
+        "PATTERNS": ["consistent"],
+        "TRADEOFFS": [],
+        "PHILOSOPHY": []
+      },
+      "scores_before_penalty": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.4,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "overlap_count": 1,
+      "overlap_penalty_per_section": 0.0,
+      "target_section_hint": null,
+      "target_section_hint_boost": 0.0,
+      "scores_final": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.4,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "final_score": 0.4,
+      "routed_to": "PATTERNS",
+      "tie_break_applied": false,
+      "threshold_band": "<0.5 (individual escalation)"
+    },
+    {
+      "id": "ADR-plan-2026-05-15-1137-007",
+      "source_checkpoint": "verify.phase-5.gate",
+      "decision_text": "Ready to Ship — unlock_ship flipped to true; verified_commit_sha recorded; manifest generated",
+      "rationale_text": "Verification Report (verbatim summary): Phase 1 8/8 adapted plugin checks PASS (plugin.json validity, frontmatter shape across all 4 new files, R-4 grep clean 3-of-3 with 0 drift, Klaus-trio byte-identical to pre-Aron baseline via git hash-object, corpus literal-text byte-match present in both corpus-contradiction files, SKILL v1.0.1 patches present at L4/L49/L215/L244); Phase 2 catastrophiser-equivalent T8b PASS (Klaus-as-Aron audit of hidden-assumption.md hit 5 of 5 expected findings vs target ≥2, all 8 phases executed end-to-end, 16 CQs fired across 3 arguments and 4 Walton scheme assignments, 4 Pollock-classified rebuttals 1 rebut + 3 undercuts, Aron persona compliance maintained throughout, methodology survived degraded mode); Phase 3 cynic polish on skill body running in background as optional non-gating finalisation. Deferred items: 4 of 7 T8b methodology gaps to v1.1, T6 4 minor polish nits, T9 3 minor polish nits, worktree cleanup. All deferred items are documented in .claude/reviews/code/{4,6,9}.json and the Tier-1 log; none are shipping blockers. The Aron quartet (agent + skill + 2 commands + 4 references + 10 fixtures + README addition) ships independently of Klaus trio which remains byte-identical to baseline.",
+      "matched_keywords": {
+        "PURPOSE": [],
+        "STACK": ["version"],
+        "ARCHITECTURE": [],
+        "PATTERNS": [],
+        "TRADEOFFS": [],
+        "PHILOSOPHY": []
+      },
+      "scores_before_penalty": {
+        "PURPOSE": 0.0,
+        "STACK": 0.4,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "overlap_count": 1,
+      "overlap_penalty_per_section": 0.0,
+      "target_section_hint": null,
+      "target_section_hint_boost": 0.0,
+      "scores_final": {
+        "PURPOSE": 0.0,
+        "STACK": 0.4,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.0,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "final_score": 0.4,
+      "routed_to": "STACK",
+      "tie_break_applied": false,
+      "threshold_band": "<0.5 (individual escalation)",
+      "notes": "STACK match driven by version tokens (v1.0.1, v1.1); semantically this is a verify-gate decision and a reviewer may prefer to re-route to PURPOSE or TRADEOFFS during individual escalation."
+    },
+    {
+      "id": "ADR-plan-2026-05-15-1137-008",
+      "source_checkpoint": "ship.stage-2.commit-strategy",
+      "decision_text": "Direct push to remote main (no PR); preserve full 24-commit history including task merges, fix-ups, cynic polish, and skill v1.0.1",
+      "rationale_text": "(no annotation; selected from option list). Solo-owned plugin (single maintainer); no parallel contributors needing the PR review gate. Full per-task history is the Tier-1 audit trail's commit-level companion and is best preserved. The PR-gate methodology rule is explicitly waived for solo plugin maintenance; this decision is recorded as the architectural precedent for future Aron-like additions to this repo.",
+      "matched_keywords": {
+        "PURPOSE": [],
+        "STACK": [],
+        "ARCHITECTURE": [],
+        "PATTERNS": ["rule"],
+        "TRADEOFFS": [],
+        "PHILOSOPHY": []
+      },
+      "scores_before_penalty": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.4,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "overlap_count": 1,
+      "overlap_penalty_per_section": 0.0,
+      "target_section_hint": null,
+      "target_section_hint_boost": 0.0,
+      "scores_final": {
+        "PURPOSE": 0.0,
+        "STACK": 0.0,
+        "ARCHITECTURE": 0.0,
+        "PATTERNS": 0.4,
+        "TRADEOFFS": 0.0,
+        "PHILOSOPHY": 0.0
+      },
+      "final_score": 0.4,
+      "routed_to": "PATTERNS",
+      "tie_break_applied": false,
+      "threshold_band": "<0.5 (individual escalation)"
+    }
+  ]
+}
