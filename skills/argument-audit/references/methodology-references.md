@@ -144,16 +144,46 @@ By convention this skill uses the following Argdown forms:
 
 **Rebutting** (attacks the claim node):
 
+Two forms, depending on whether the attack is a bare counter-statement
+or a named counter-argument.
+
+Statement-level rebut (a counter-statement contradicts the claim):
+
 ```argdown
 [OriginalClaim]: A is true.
-  - <[Counter]: A is false.>
+  - [Counter]: A is false.
 ```
 
-The `-` arrow is a contradicts-the-claim attack. Rebutting defeaters
-typically render as a `[Counter]` statement node with the negated content,
-attached via `-` to the original claim.
+The `-` arrow is a contradicts-the-claim attack. Statement nodes use
+square brackets only; do not wrap the counter in `<...>`.
+
+Argument-level rebut (a named argument attacks the claim):
+
+```argdown
+[OriginalClaim]: A is true.
+  <- <CounterArgument>
+
+<CounterArgument>: reasons that A is false.
+    (1) <premise>
+    (2) <premise>
+    -----
+    (3) A is false.
+```
+
+The `<-` arrow reads "OriginalClaim is attacked by CounterArgument".
+Use this form when the rebuttal has its own internal structure worth
+naming and reasoning about; use the statement-level form when the
+counter is a single asserted negation with no further support.
 
 **Undercutting** (attacks an inference, not a claim):
+
+Argdown gives two equivalent forms for an undercut relation: the
+_incoming_ form (anchored under the target, reads "target is undercut
+by ..."), and the _outgoing_ form (anchored under the attacker, reads
+"attacker undercuts ..."). Pick whichever reads more naturally for the
+surrounding prose; both produce the same parsed relation.
+
+Incoming form — anchor the relation under the target argument:
 
 ```argdown
 <ExpertOpinionInstance>
@@ -162,14 +192,26 @@ attached via `-` to the original claim.
 (2) E asserts A.
 -----
 (3) A is plausibly true.
+    <_ <BiasUndercutter>
 
-<_BiasUndercutter>: E has a financial stake in A being accepted.
-    <_ <ExpertOpinionInstance>
+<BiasUndercutter>: E has a financial stake in A being accepted.
 ```
 
-The `<_` arrow targets the inferential step (the line above the
-conclusion), not the conclusion itself. We attach the undercutter to the
-named argument, not to its premises or conclusion.
+Read: "ExpertOpinionInstance is undercut by BiasUndercutter."
+
+Outgoing form — anchor the relation under the attacking argument:
+
+```argdown
+<BiasUndercutter>: E has a financial stake in A being accepted.
+    _> <ExpertOpinionInstance>
+```
+
+Read: "BiasUndercutter undercuts ExpertOpinionInstance."
+
+In both forms the `<_` / `_>` arrows target the inferential step (the
+named argument as a whole), not the conclusion or any individual
+premise. The undercutter attacks the warrant — the link from premises
+to conclusion — rather than the content of either end.
 
 ### When to prefer which
 
@@ -192,17 +234,19 @@ and is harder for the proponent to flip back on you.
 In the audit report's `## Rebuttals` section, each rebuttal appears as a
 small Argdown block prefixed with its Pollock classification:
 
-```markdown
+````markdown
 ### Rebuttal 1 — Undercutting (Bias CQ)
 
 `<ExpertOpinionInstance>` is undercut: the cited expert is the principal
 investigator on the funded study being defended.
 
-\`\`\`argdown
-<_BiasUndercutter>: E is the PI on the study under discussion.
-<_ <ExpertOpinionInstance>
-\`\`\`
+```argdown
+<ExpertOpinionInstance>
+    <_ <BiasUndercutter>
+
+<BiasUndercutter>: E is the PI on the study under discussion.
 ```
+````
 
 Every rebuttal carries its classification (`Rebutting` or `Undercutting`)
 in the heading. Mixed attacks (one of each against the same target) are

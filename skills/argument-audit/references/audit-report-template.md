@@ -172,8 +172,10 @@ followed by a short Argdown block:
 `<ExpertOpinionInstance>` is undercut: <one-sentence reason>.
 
 ```argdown
-<_BiasUndercutter>: <claim>.
-    <_ <ExpertOpinionInstance>
+<ExpertOpinionInstance>
+    <_ <BiasUndercutter>
+
+<BiasUndercutter>: <claim>.
 ```
 ````
 
@@ -212,6 +214,11 @@ Three sub-elements, in this order:
 
 This section is rendered in every audit, not just sparring sessions —
 it serves as the agent's pre-emptive stress test of its own conclusion.
+
+In single-pass audits, only the crux-collapse and voting-issues LD
+primitives apply; the mitigate/outweigh/concede-and-redirect and
+dropped-arguments-conceded primitives from `methodology-references.md`
+§3 only fire during multi-turn `aron-spar` sessions.
 
 ### Cross-document synthesis (corpus mode only)
 

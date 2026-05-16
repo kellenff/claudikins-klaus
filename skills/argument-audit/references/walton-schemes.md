@@ -13,7 +13,7 @@ middle column; the right-hand column says which scheme to load.
 
 | Cue family                                              | Surface phrases (non-exhaustive)                                                                                  | Scheme to load                   |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| Appeal to authority / testimony                         | "according to", "X says", "studies show", "research indicates", "as Dr. Y argues", "the consensus is"             | Argument from Expert Opinion     |
+| Appeal to authority / testimony                         | "according to", "X says", "studies show", "research indicates", "as Dr Y argues", "the consensus is"              | Argument from Expert Opinion     |
 | Indicator / correlation language                        | "is a sign of", "indicates", "correlates with", "is associated with", "X tracks Y", "wherever X, also Y"          | Argument from Sign / Correlation |
 | Comparison between two cases                            | "just like", "analogous to", "in the same way that", "this is similar to the case of", "by parity of reasoning"   | Argument from Analogy            |
 | Goodness/badness of outcomes used as reason for/against | "if we do X, then Y will happen", "the upshot is", "this would lead to", "we should reject this because it would" | Argument from Consequences       |
