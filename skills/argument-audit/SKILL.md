@@ -1,7 +1,7 @@
 ---
 name: argument-audit
 description: Use when auditing logical arguments — finding hidden assumptions, equivocations, unsupported leaps, and surviving rebuttals — in either prose or structured Argdown documents. Runs an 8-phase methodology with bidirectional prose↔Argdown via the @casualtheorics/argdown-plugin, Walton scheme classification, Pollock rebut/undercut distinctions, and Lincoln-Douglas digest sparring. Triggers on requests to audit/critique/find-holes-in/pressure-test an argument.
-version: 1.0.0
+version: 1.0.1
 ---
 
 # Argument Audit Methodology
@@ -46,13 +46,17 @@ Practical shape of a steelman:
 
 ## Phase 2: Validate-or-Extract
 
-Probe whether `mcp__argdown-mcp__parse` is available via the tool-executor.
+**Argdown MCP probe procedure.** Attempt to call `mcp__argdown-mcp__parse` (or the tool-executor-namespaced equivalent `mcp__plugin__casualtheorics_argdown-plugin_argdown-mcp__parse`) with a trivial input: `{kind: "inline", source: "[Test]: hello"}`. Three outcomes:
 
-If unavailable, emit verbatim:
+1. **Successful response with parse counts** → argdown plugin available; proceed to the input-shape branch below.
+2. **Tool call fails with "tool not found" / "tool not in inventory"** → argdown plugin not bound to your tool surface. Emit the install message below and continue in degraded mode.
+3. **Tool call returns an error from the plugin itself** (e.g., parse error on `[Test]: hello`) → unexpected; surface the error verbatim to the user and degrade to prose-only mode rather than retry blindly.
+
+If degraded mode triggers, emit verbatim:
 
 > Argdown plugin not installed; run `/plugin install @casualtheorics/argdown-plugin` and retry. Falling back to prose-only critique without structural verification.
 
-…and continue from Phase 3 in degraded mode (no AST, prose-only critique; skip the AST-dependent steps inside Phases 3, 4, and 7). The verdict callout is still mandatory in degraded mode — it just typically lands on `Indeterminate`.
+…and continue from Phase 3 in degraded mode. Degraded mode does NOT mean "Indeterminate verdict by default" — a competent prose-only structural pass can still produce `Conditional` or `Defeated` when concrete findings warrant. `Indeterminate` is the fallback for cases where prose alone cannot resolve the structure, not the automatic outcome of degraded mode. The Verdict callout remains mandatory either way.
 
 If available, branch on input shape:
 
@@ -208,7 +212,7 @@ Decide the verdict. Exactly one of:
 - **Defeated** — at least one rebut or undercut survives that defeats the conclusion. (For corpus mode: any claim landing in OUT under the grounded extension forces this verdict.)
 - **Indeterminate** — input is too thin or too ambiguous to judge, or the Argdown plugin was unavailable and no structural verification could be performed.
 
-**The Verdict callout MUST be the first line of every output**, before any persona narration, framing, or preamble. Render it as a Markdown blockquote:
+**The Verdict callout MUST be the first line of the rendered audit body**, before any persona narration, framing, or preamble inside the audit. Tool invocations during Phases 0–7 (probing the argdown plugin, calling `export_json`, invoking sub-skills, reading source files) are NOT part of the rendered audit body and may precede the callout. Persona pre-ambles described in the wrapping agent (e.g. board state, stage directions, opening flourish) MUST appear AFTER the Verdict callout, never before. Render it as a Markdown blockquote:
 
 ```markdown
 > **Verdict:** Defeated — <one-sentence summary>
@@ -237,6 +241,7 @@ Verdict-decision worked rules:
 - If Phase 3 surfaced any `unsupported_premise` of `high` severity that no Phase 6 fix addresses → at best `Conditional`, never `Sound`.
 - If Phase 6 produced at least one surviving rebut whose target is the top-level conclusion → `Defeated`.
 - If Phase 6 produced surviving undercuts only (no rebuts) → `Conditional` (the conclusion is not falsified, but the inference to it is weakened; name the inference assumptions).
+- **Partial rebuts.** If Phase 6 produced a surviving rebut whose target is a SUB-argument or intermediate conclusion (not the top-level claim directly), AND that sub-argument is load-bearing for the top-level conclusion (its support cannot be reconstructed from the remaining premises), default to `Conditional` — name the surviving sub-argument rebut in the one-sentence summary. If the sub-argument is non-load-bearing (the top-level claim survives on independent grounds), the rebut is recorded in the report but does not change the verdict.
 - If Phase 7 (corpus mode) put the top-level claim in `OUT` under the grounded extension → `Defeated`, overriding any per-document `Sound` verdict.
 - If the document is too thin to even apply Phase 3 (e.g. one sentence with no premise/conclusion structure) → `Indeterminate` with a note explaining what additional structure would be needed.
 
