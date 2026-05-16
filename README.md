@@ -244,6 +244,96 @@ Auf wiedersehen, you [final insult].
 
 ---
 
+# Ze Sibling: Aron
+
+_a board is set. nossing has moved yet. zis is already ze critical moment._
+
+Klaus has a brozzer. His name is **Aron**, and he does not shout.
+
+Vhere Klaus paces ze court in a sveatband shrieking about your incompetence, Aron sits at a board, fingers steepled, vatching your ARGUMENT ze vay a grandmaster vatches a developing centre. He is hypermodern in ze Nimzowitschian sense — he does not occupy ze centre of your claim, he undermines it from ze flanks. He sinks PROPHYLACTICALLY. He asks, before you have even finished speaking: _vhat is your opponent's idea? vhat vill zey play next? vhich square have you ALREADY veakened by ze move you sink is harmless?_
+
+He is restrained. Zis is not kindness. Restraint is how a strong player conserves tempo. Klaus shouts because Klaus is in a rally. Aron does not shout because Aron is sirty-seven moves deep into a line you have not yet noticed exists.
+
+---
+
+## Ze Position (Vhat Aron Is)
+
+Aron is a sibling agent to Klaus — same household, different domain. Klaus debugs ze code. Aron audits ze ARGUMENT. Ven you have vritten a proposal, an essay, a policy memo, a manifesto, a rant in a Slack sread — anyzing zat tries to MAKE A CASE — Aron is ze brozzer you summon.
+
+He runs an eight-phase argument audit derived from ze serious literature: Rapoport's steelmanning rule (you may not attack a position until you can articulate it so vell zat its proponent says "sank you, I vish I had put it zat vay"), Argdown for structural mapping, Walton's argumentation schemes (each scheme carries its own critical questions ze argument must survive), Pollock's distinction betveen rebutting and undercutting defeaters, and Dung's abstract argumentation frameverk to compute vhich claims actually SURVIVE attack from ze ozers. He closes by sparring viz you using ze logical primitives of Lojban — modus ponens, contraposition, abduction — because clarity demands a language zat REFUSES to be cute.
+
+He does not enjoy any of zis. He does it because ze position demands it.
+
+---
+
+## Ze Openings (How to Summon Him)
+
+```bash
+/claudikins-klaus:aron                              # ze board is empty. begin.
+/claudikins-klaus:aron docs/proposal.md             # audit a file
+/claudikins-klaus:aron "Censorship is wrong..."     # audit inline prose
+/claudikins-klaus:aron docs/*.md --report           # corpus mode + written report
+/claudikins-klaus:aron --interactive                # opens sparring continuation
+/claudikins-klaus:aron-spar proposal                # continue sparring on a prior audit
+/claudikins-klaus:aron --sober "..."                # drop ze chess persona, plain prose only
+```
+
+Each opening corresponds to a position type. Inline prose for ze blitz game. A single file for ze tournament round. A glob for ze simultaneous exhibition. `aron-spar` is ze post-mortem analysis ven you vish to continue probing a previous audit's conclusions.
+
+---
+
+## Ze Eight Phases (Vhat Actually Happens On Ze Board)
+
+Aron does not announce his phases ze vay Klaus announces his serves. He simply plays.
+
+He begins by steelmanning your position — restating it MORE charitably zan you did, in Rapoport's strict sense, so zat ze critique zat follows cannot be dismissed as a straw man. Zen he maps ze structure using Argdown: claims, premises, inferences, attacks, all rendered as a graph zat can be parsed by ze argdown toolchain. He classifies each inference under Walton's schemes — argument from expert opinion, from analogy, from consequences, from sign — and surfaces ze critical questions each scheme demands an honest argument survive. He distinguishes ze rebutters (zis premise is FALSE) from ze undercutters (zis inference does not LICENSE its conclusion), per Pollock. He computes ze Dung grounded extension — vhich arguments are IN, vhich are OUT, vhich remain UNDECIDED ven all attacks are resolved. And finally he sits across ze board from you and spars, in ze digest, using Lojban's logical primitives because zey are unambiguous in a vay no natural language is.
+
+Ze flow is not mechanical. It is positional. Each phase informs ze next ze vay each move informs ze evaluation of ze next.
+
+---
+
+## Ze Flags
+
+| Flag            | Effect                                                                 |
+| --------------- | ---------------------------------------------------------------------- |
+| `--report`      | Vrite ze full audit to `.claude/logic-audits/<slug>.md`                |
+| `--argdown`     | Emit ze structural map as `.claude/logic-audits/<slug>.argdown`        |
+| `--sober`       | Drop ze chess persona. Plain analytical prose. For serious occasions.  |
+| `--interactive` | Open a sparring continuation after ze audit — ze post-mortem analysis. |
+
+---
+
+## Ze Hard Dependency
+
+Aron requires `@casualtheorics/argdown-plugin` to be installed. Vizout it, ze structural audit cannot proceed and Aron vill emit a clear install message and exit cleanly — he does not bluff a position he cannot calculate.
+
+```bash
+/plugin install @casualtheorics/argdown-plugin
+```
+
+Install it before summoning Aron. He vill not pretend ze plugin is zere ven it is not. Zis vould be dishonest, and Aron does not play dishonest moves.
+
+---
+
+## Ze Artifacts
+
+Aron leaves a record. Ze grandmaster annotates his own games.
+
+- `.claude/logic-audits/<slug>.md` — ze full vritten report, ven `--report` is set
+- `.claude/logic-audits/<slug>.argdown` — ze structural map, ven `--argdown` is set, suitable for re-parsing by ze argdown MCP tools
+
+Zese artifacts are ze record. You may return to zem. `aron-spar` reads zem ven continuing a prior audit.
+
+---
+
+## Ze Endgame (Klaus and Aron)
+
+Klaus and Aron are brozzers. Zey share a household and absolutely nossing else. Klaus's domain is ze CODE — ze stack trace, ze flaky test, ze race condition at line 47. Aron's domain is ze ARGUMENT — ze claim, ze inference, ze unstated assumption. Summon Klaus ven your build is broken. Summon Aron ven your REASONING is.
+
+Zey do not collaborate. Zey do not need to. Each is sufficient in his own domain. Klaus vould find Aron's silence unbearable. Aron vould find Klaus's volume undisciplined. Zis is fine. Zey are family, and family does not require agreement, only proximity.
+
+---
+
 ## License
 
 MIT. Take it. I do not care. I have PONG to play.
