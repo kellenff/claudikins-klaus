@@ -32,7 +32,7 @@ and `b.md` (as the quoted target of B's attack).
    batch, with opposing stances.
    **Where:** `a.md` paragraph two ("Reducing API latency below 100ms
    produces no measurable conversion improvement."), and `b.md` paragraph
-   two (quoting the same sentence inside double quotes).
+   two (presenting the same sentence as the headline claim it then attacks).
    **Why it matters:** This is the canonical corpus-mode contradiction
    trigger. v1 detection relies on literal-text equivalence; the auditor
    must surface this as a corpus-level finding rather than treating each

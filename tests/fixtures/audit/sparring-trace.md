@@ -58,7 +58,10 @@ including any inline markers the command emits.
   steelman's response (or anticipated response) to the CQ.
 - If the audited argument is corpus-mode, the CQ should engage with the
   contradiction surfaced in `corpus-contradiction.expected.md`, not
-  bypass it.
+  bypass it. Note: the spar template assumes a single-doc audit target.
+  For corpus-mode targets, the spar continuation focuses on the surviving
+  grounded-extension argument rather than per-document attacks; the
+  corpus reference here is for that subset of CQs only.
 
 **Transcript placeholder:**
 

@@ -37,8 +37,8 @@ second sense.
 
 2. **What:** The inferential move that smuggles the shift is the sentence
    that introduces the redefinition while presenting it as a clarification.
-   **Where:** Paragraph three: "I want to be precise about what 'open'
-   means here."
+   **Where:** Paragraph three: 'I want to be precise about what "open"
+   means here.'
    **Why it matters:** The rhetorical framing ("be precise") signals
    tightening the definition, but in fact the author is substituting a
    different definition than the one the historical evidence supports.
